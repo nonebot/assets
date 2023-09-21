@@ -26,7 +26,12 @@ jobs:
           SPONSORKIT_AFDIAN_USER_ID: ${{ secrets.AFDIAN_USER_ID }}
           SPONSORKIT_AFDIAN_TOKEN: ${{ secrets.AFDIAN_TOKEN }}
           SPONSORKIT_AFDIAN_EXECHANGERATE: 1
-      
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: sponsors-assets
+
       - name: Push generated files
         run: |
           git config user.name github-actions[bot]
