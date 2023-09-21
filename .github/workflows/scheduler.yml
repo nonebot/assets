@@ -1,0 +1,36 @@
+name: Scheduler
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    branches: [main]
+
+jobs:
+  update-sponsors:
+    runs-on: ubuntu-latest
+    environment: afdian
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: ./.github/actions/setup-node
+
+      - name: Setup CJK fonts
+        uses: ./.github/actions/setup-fonts
+
+      - name: Update sponsors
+        run: pnpm run build
+        env:
+          SPONSORKIT_AFDIAN_USER_ID: ${{ secrets.AFDIAN_USER_ID }}
+          SPONSORKIT_AFDIAN_TOKEN: ${{ secrets.AFDIAN_TOKEN }}
+          SPONSORKIT_AFDIAN_EXECHANGERATE: 1
+      
+      - name: Push generated files
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git add sponsors.*
+          git diff-index --quiet HEAD || git commit -m ":money_with_wings: update sponsors.svg"
+          git push
