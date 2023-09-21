@@ -17,7 +17,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy assets
-    environment: sponsor
+    environment: netlify
     concurrency:
       group: website-deploy-${{ github.ref }}
       cancel-in-progress: true
