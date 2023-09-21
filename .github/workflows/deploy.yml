@@ -2,7 +2,11 @@ name: Site Deploy
 
 on:
   push:
-    branches: [master, assets]
+    branches: [assets]
+  workflow_run:
+    workflows: ["Scheduler"]
+    types:
+      - completed
 
 permissions:
   contents: read
