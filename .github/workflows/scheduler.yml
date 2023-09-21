@@ -11,7 +11,7 @@ jobs:
   generate-sponsors:
     runs-on: ubuntu-latest
     name: Generate sponsors
-    environment: afdian
+    environment: sponsor
 
     steps:
       - uses: actions/checkout@v4
@@ -25,9 +25,12 @@ jobs:
       - name: Update sponsors
         run: pnpm run build
         env:
-          SPONSORKIT_AFDIAN_USER_ID: ${{ secrets.AFDIAN_USER_ID }}
           SPONSORKIT_AFDIAN_TOKEN: ${{ secrets.AFDIAN_TOKEN }}
-          SPONSORKIT_AFDIAN_EXECHANGERATE: 1
+          SPONSORKIT_AFDIAN_USER_ID: ${{ secrets.AFDIAN_USER_ID }}
+          SPONSORKIT_AFDIAN_EXECHANGERATE: 7
+          SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.OPENCOLLECTIVE_KEY }}
+          SPONSORKIT_OPENCOLLECTIVE_SLUG: ${{ secrets.OPENCOLLECTIVE_SLUG }}
+          SPONSORKIT_OPENCOLLECTIVE_TYPE: person
 
       - name: Upload generated files
         uses: actions/upload-artifact@v3
