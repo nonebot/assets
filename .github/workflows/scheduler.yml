@@ -45,7 +45,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: sponsors-assets
+          ref: assets
 
       - name: Download results
         uses: actions/download-artifact@v3
