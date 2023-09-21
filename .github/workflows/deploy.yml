@@ -1,7 +1,6 @@
 name: Site Deploy
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - "assets"
@@ -21,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: assets
 
       - name: Get Branch Name
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
