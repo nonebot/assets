@@ -2,8 +2,7 @@ name: Site Deploy
 
 on:
   push:
-    branches:
-      - "assets"
+    branches: [master, assets]
 
 permissions:
   contents: read
