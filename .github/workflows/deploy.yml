@@ -3,10 +3,6 @@ name: Site Deploy
 on:
   push:
     branches: [assets]
-  workflow_run:
-    workflows: ["Scheduler"]
-    types:
-      - completed
 
 permissions:
   contents: read
