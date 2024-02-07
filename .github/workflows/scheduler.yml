@@ -53,7 +53,7 @@ jobs:
         with:
           name: generated-static-files
           path: |
-            ${{ github.workspace }}/static/*
+            ${{ github.workspace }}/static/
             retention-days: 1
 
   update-sponsors:
@@ -66,6 +66,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: assets
+      
+      - name: Clear files
+        run: rm -r ./*
 
       - name: Download sponsors
         uses: actions/download-artifact@v4
@@ -77,7 +80,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: generated-static-files
-          path: ${{ github.workspace }}
+          path: /tmp
+      
+      - run: |
+          mv /tmp/static/* ${{ github.workspace }}
 
       - name: Push generated files
         run: |
