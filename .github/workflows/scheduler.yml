@@ -35,9 +35,26 @@ jobs:
       - name: Upload generated files
         uses: actions/upload-artifact@v4
         with:
-          name: generated
+          name: generated-sponsors
           path: |
             ${{ github.workspace }}/sponsors.*
+            if-no-files-found: error
+            retention-days: 1
+  
+  generate-static-files:
+    runs-on: ubuntu-latest
+    name: Generate static files
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload static files
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-static-files
+          path: |
+            ${{ github.workspace }}/static/*
+            retention-days: 1
 
   update-sponsors:
     runs-on: ubuntu-latest
@@ -50,16 +67,22 @@ jobs:
         with:
           ref: assets
 
-      - name: Download results
+      - name: Download sponsors
         uses: actions/download-artifact@v4
         with:
-          name: generated
+          name: generated-sponsors
+          path: ${{ github.workspace }}
+      
+      - name: Download static files
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-static-files
           path: ${{ github.workspace }}
 
       - name: Push generated files
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          git add sponsors.*
-          git diff-index --quiet HEAD || git commit -m ":money_with_wings: update sponsors.svg"
+          git add .
+          git diff-index --quiet HEAD || git commit -m ":bento: update assets"
           git push
