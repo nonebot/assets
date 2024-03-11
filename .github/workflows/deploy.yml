@@ -34,7 +34,7 @@ jobs:
           echo "HEAD_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2
+        uses: nwtgck/actions-netlify@v3
         with:
           publish-dir: "."
           production-deploy: true
