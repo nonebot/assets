@@ -1,14 +1,63 @@
-import { defineConfig } from "sponsorkit";
+import { defineConfig, tierPresets, type BadgePreset } from "sponsorkit";
 
 const year = new Date().getFullYear();
 const month = new Date().getMonth() + 1;
 
 const date = `${year}-${month.toString().padStart(2, "0")}`;
+const past: BadgePreset = {
+  avatar: {
+    size: 20,
+  },
+  boxWidth: 22,
+  boxHeight: 22,
+  container: {
+    sidePadding: 35,
+  },
+};
 
 export default defineConfig({
   outputDir: ".",
   formats: ["svg", "png"],
-
+  tiers: [
+    {
+      title: "Past Sponsors",
+      monthlyDollars: -1,
+      preset: past,
+    },
+    {
+      title: "Backers",
+      preset: tierPresets.small,
+    },
+    {
+      title: "Sponsors",
+      monthlyDollars: 5,
+      preset: {
+        avatar: {
+          size: 42,
+        },
+        boxWidth: 52,
+        boxHeight: 52,
+        container: {
+          sidePadding: 30,
+        },
+      },
+    },
+    {
+      title: "Silver Sponsors",
+      monthlyDollars: 10,
+      preset: tierPresets.medium,
+    },
+    {
+      title: "Gold Sponsors",
+      monthlyDollars: 25,
+      preset: tierPresets.large,
+    },
+    {
+      title: "Platinum Sponsors",
+      monthlyDollars: 50,
+      preset: tierPresets.xl,
+    },
+  ],
   renders: [
     {
       name: `sponsors.${date}`,
