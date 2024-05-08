@@ -1,5 +1,9 @@
-import { BadgePreset, defineConfig, presets } from "sponsorkit";
+import { defineConfig, tierPresets, type BadgePreset } from "sponsorkit";
 
+const year = new Date().getFullYear();
+const month = new Date().getMonth() + 1;
+
+const date = `${year}-${month.toString().padStart(2, "0")}`;
 const past: BadgePreset = {
   avatar: {
     size: 20,
@@ -12,6 +16,8 @@ const past: BadgePreset = {
 };
 
 export default defineConfig({
+  outputDir: ".",
+  formats: ["svg", "png"],
   tiers: [
     {
       title: "Past Sponsors",
@@ -20,7 +26,7 @@ export default defineConfig({
     },
     {
       title: "Backers",
-      preset: presets.small,
+      preset: tierPresets.small,
     },
     {
       title: "Sponsors",
@@ -39,17 +45,61 @@ export default defineConfig({
     {
       title: "Silver Sponsors",
       monthlyDollars: 10,
-      preset: presets.medium,
+      preset: tierPresets.medium,
     },
     {
       title: "Gold Sponsors",
       monthlyDollars: 25,
-      preset: presets.large,
+      preset: tierPresets.large,
     },
     {
       title: "Platinum Sponsors",
       monthlyDollars: 50,
-      preset: presets.xl,
+      preset: tierPresets.xl,
+    },
+  ],
+  renders: [
+    {
+      name: `sponsors.${date}`,
+      width: 1000,
+      includePastSponsors: false,
+      renderer: "circles",
+    },
+    {
+      name: "sponsors.all",
+      width: 1000,
+      includePastSponsors: true,
+      renderer: "circles",
+    },
+    {
+      name: "sponsors",
+      width: 800,
+      includePastSponsors: true,
+      renderer: "tiers",
+    },
+    {
+      name: "sponsors.wide",
+      width: 1800,
+      includePastSponsors: true,
+      renderer: "tiers",
+    },
+    {
+      name: "sponsors.part1",
+      width: 800,
+      includePastSponsors: true,
+      renderer: "tiers",
+      filter(sponsor) {
+        return sponsor.monthlyDollars >= 9.9;
+      },
+    },
+    {
+      name: "sponsors.part2",
+      width: 800,
+      includePastSponsors: true,
+      renderer: "tiers",
+      filter(sponsor) {
+        return sponsor.monthlyDollars < 9.9;
+      },
     },
   ],
 });
