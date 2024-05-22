@@ -1,11 +1,11 @@
 {
   "type": "module",
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.1.2",
   "scripts": {
     "build": "sponsorkit"
   },
   "devDependencies": {
-    "@types/node": "^20.12.10",
-    "sponsorkit": "^0.13.1"
+    "@types/node": "^20.12.12",
+    "sponsorkit": "^0.14.4"
   }
 }
