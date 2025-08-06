@@ -71,13 +71,13 @@ jobs:
         run: rm -r ./*
 
       - name: Download sponsors
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: generated-sponsors
           path: ${{ github.workspace }}
       
       - name: Download static files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: generated-static-files
           path: /tmp
