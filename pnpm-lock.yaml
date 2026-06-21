@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  sponsorkit: 0f4923e9510c40867233c35d81f923c167d655c2626e5e82aa2469cc334336f6
+
 importers:
 
   .:
@@ -13,7 +16,7 @@ importers:
         version: 26.0.0
       sponsorkit:
         specifier: ^17.1.1
-        version: 17.1.1
+        version: 17.1.1(patch_hash=0f4923e9510c40867233c35d81f923c167d655c2626e5e82aa2469cc334336f6)
 
 packages:
 
@@ -416,7 +419,7 @@ snapshots:
       '@img/sharp-win32-ia32': 0.34.5
       '@img/sharp-win32-x64': 0.34.5
 
-  sponsorkit@17.1.1:
+  sponsorkit@17.1.1(patch_hash=0f4923e9510c40867233c35d81f923c167d655c2626e5e82aa2469cc334336f6):
     dependencies:
       ansis: 4.3.1
       cac: 7.0.0

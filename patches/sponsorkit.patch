@@ -1,0 +1,12 @@
+diff --git a/dist/shared/sponsorkit.CIuglHuW.mjs b/dist/shared/sponsorkit.CIuglHuW.mjs
+index 5c55524590a27c7ec9727a14ba82731a772219f4..a4db5aa2a36eb57a7807e0bb2800860301d94424 100644
+--- a/dist/shared/sponsorkit.CIuglHuW.mjs
++++ b/dist/shared/sponsorkit.CIuglHuW.mjs
+@@ -1486,6 +1486,7 @@ async function fetchOpenCollectiveSponsors(key, id, slug, githubHandle, includeP
+         "Content-Type": "application/json"
+       }
+     });
++    console.log("data", data);
+     const nodes = data.data.account.transactions.nodes;
+     const totalCount = data.data.account.transactions.totalCount;
+     monthlyTransactions.push(...nodes || []);
